@@ -8,9 +8,9 @@ i dunno what to say, just a comment
 import threading
 from queue import Queue, Empty
 
-class Multithread:
+class MultiThread:
     def __init__(self, input_quee, num_workers = 4):
-        self.input_quee = input_quee
+        self.input_queue = input_quee
         self.results = Queue()
         self.num_workers = num_workers
         self.stop_event = threading.Event()
@@ -25,11 +25,11 @@ class Multithread:
                 matrix = self.input_queue.get(timeout=1)
             except Empty:
                 continue
-            self.results.put(self.process(matrix))
+            self.results.put(self.preprocessing(matrix))
 
     def start(self):
         for _ in range(self.num_workers):
-            t = threading.Thread(target=self._worker, daemon=True)
+            t = threading.Thread(target=self.worker, daemon=True)
             t.start()
             self.threads.append(t)
 

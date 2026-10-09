@@ -6,9 +6,9 @@ I need this file for for batch the data
 """
 
 from data_streaming import DataStreaming
-import configs as get
 import numpy as np
 from queue import Queue, Empty
+import multiprocessing as mp
 
 
 data = DataStreaming()
@@ -18,7 +18,7 @@ class DataBatching:
     def __init__(self, streamer, batch_size: int = 1000):
         self.streamer = streamer
         self.batch_size = batch_size
-        self.output = Queue()        # full matrices wait here for workers
+        self.output = mp.Queue()        # full matrices wait here for workers
         self.running = False
 
     def run(self):
