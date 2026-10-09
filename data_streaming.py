@@ -6,7 +6,7 @@ This file will help me to stream data to RAM.
 """
 
 class DataStreaming:
-    
+
     def start(self):
         pass
 
@@ -23,4 +23,13 @@ class DataStreaming:
         pass
 
     def get_stats(self):
+        pass
+
+    def validate_sample(self, sample):
+        pass
+
+    def reset_stats(self):
+        pass
+
+    def health_check(self):
         pass
