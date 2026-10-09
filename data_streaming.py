@@ -38,13 +38,7 @@ class DataStreaming:
             generated_data = self.generate_sample(self.sample_id)
             if self.validate_sample(generated_data):
                 self.sample_id += 1
-                self.push_to_queue(generated_data)
-
-            if self.sample_id == 10:
-                self.stop()
-                self.printer()
-
-            
+                self.push_to_queue(generated_data)          
 
     def generate_sample(self, id : int):
         data = {
@@ -58,6 +52,9 @@ class DataStreaming:
 
     def validate_sample(self, sample) -> bool:
         return None not in sample.values()
+
+    def get_sample(self, timeout=1):
+        return self.queue.get(timeout=timeout)
 
     def push_to_queue(self, sample):
         self.queue.put(sample)
@@ -73,8 +70,3 @@ class DataStreaming:
 
     def health_check(self):
         pass
-
-
-a = DataStreaming()
-
-a.stream()
